@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>阿里国际站 RFQ 报价全流程实操技巧 · 2026</title>
+<meta name="description" content="阿里国际站 RFQ 报价全流程实操 SOP：商机精准筛选、报价时效与表单优化、内容差异化、主动引导与二次跟进，含 2026 年官方规则拓展与口径校准。">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f172a'/%3E%3Cpath d='M17 16h8' stroke='%2338bdf8' stroke-width='2'/%3E%3Ccircle cx='10' cy='16' r='3.5' fill='%2338bdf8'/%3E%3Ccircle cx='26' cy='16' r='3' fill='%230ea5e9'/%3E%3C/svg%3E">
+<style>
+/* ===============================================================
+   阿里国际站 RFQ 报价全流程 · 交互式思维导图
+   自包含样式（无外部依赖 / 无 CDN / 无外部字体）
+   =============================================================== */
+:root{
+  --bg:#f6f7f9;
+  --panel:#ffffff;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --line:#e2e8f0;
+  --ext:#0d9488;
+  --hit:#fff2a8;
+  --radius:10px;
+  --shadow:0 1px 2px rgba(15,23,42,.05),0 10px 30px -18px rgba(15,23,42,.35);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:15px/1.62 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ---------- Hero ---------- */
+.hero{
+  background:linear-gradient(135deg,#0b1220 0%,#1e3a8a 52%,#0e7490 100%);
+  color:#fff;padding:46px 24px 38px;
+}
+.hero .wrap{max-width:1320px;margin:0 auto}
+.hero .kicker{
+  display:inline-block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:#93c5fd;border:1px solid rgba(147,197,253,.45);border-radius:999px;padding:3px 12px;margin-bottom:14px;
+}
+.hero h1{margin:0 0 12px;font-size:29px;line-height:1.3;letter-spacing:.4px;font-weight:700}
+.hero .sub{margin:0;color:#cbd5e1;font-size:14px;max-width:920px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chip{
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:999px;padding:4px 12px;font-size:12.5px;color:#e0e7ff;white-space:nowrap;
+}
+.chip b{color:#fff;font-weight:600}
+
+/* ---------- Toolbar ---------- */
+.toolbar{
+  position:sticky;top:0;z-index:30;background:rgba(255,255,255,.94);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.toolbar .wrap{
+  max-width:1320px;margin:0 auto;padding:10px 20px;
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+.btn{
+  appearance:none;border:1px solid var(--line);background:#fff;color:#334155;
+  border-radius:8px;padding:6px 12px;font-size:13px;cursor:pointer;
+  font-family:inherit;line-height:1.4;transition:.15s;
+}
+.btn:hover{border-color:#94a3b8;background:#f8fafc}
+.btn.on{background:#0f172a;border-color:#0f172a;color:#fff}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg .btn{border:0;border-radius:0;border-right:1px solid var(--line)}
+.seg .btn:last-child{border-right:0}
+.search{
+  flex:1 1 200px;min-width:170px;max-width:340px;
+  border:1px solid var(--line);border-radius:8px;padding:7px 11px;font-size:13px;
+  font-family:inherit;background:#fff;color:var(--ink);
+}
+.search:focus{outline:none;border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.stat{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}
+.spacer{flex:1 1 auto}
+
+/* ---------- Legend ---------- */
+.legend{
+  max-width:1320px;margin:0 auto;padding:16px 20px 0;
+  display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted);align-items:center;
+}
+.legend .key{display:inline-flex;align-items:center;gap:7px}
+.dot{width:12px;height:12px;border-radius:4px;display:inline-block}
+
+/* ---------- Canvas ---------- */
+.canvas{
+  max-width:1320px;margin:0 auto;padding:18px 20px 64px;
+}
+.board{
+  background:var(--panel);border:1px solid var(--line);border-radius:14px;
+  box-shadow:var(--shadow);padding:26px 22px;
+  overflow:auto;max-height:calc(100vh - 196px);min-height:380px;
+  position:relative; /* 让节点 offsetTop 以 board 为基准，居中时可绝对赋值 */
+}
+
+/* ---------- Mind map (horizontal) ---------- */
+.mm,.mm ul{list-style:none;margin:0;padding:0}
+.mm{display:inline-block;min-width:100%}
+/* 槽宽 36px，连接线全部限制在槽内，永远不进入标签区域：
+     父引线 0→18  |  主干在 18  |  子引线 18→36（18 与标签左边缘之间留 18px 净空） */
+.mm ul.children{
+  display:flex;flex-direction:column;justify-content:center;
+  padding-left:36px;position:relative;
+}
+.mm li.node{display:flex;align-items:center;position:relative}
+.mm ul.children>li.node{padding:3px 0}
+/* 子节点引线：从槽中主干到标签左边缘 */
+.mm ul.children>li.node::before{
+  content:"";position:absolute;left:-18px;top:50%;width:18px;height:2px;
+  background:var(--c,#94a3b8);opacity:.5;
+}
+/* 主干：位于槽中线上，不会贴到任何一个标签 */
+.mm ul.children>li.node::after{
+  content:"";position:absolute;left:-18px;top:0;bottom:0;width:2px;
+  background:var(--c,#94a3b8);opacity:.5;
+}
+.mm ul.children>li.node:first-child::after{top:50%}
+.mm ul.children>li.node:last-child::after{bottom:50%}
+.mm ul.children>li.node:only-child::after{display:none}
+/* 父节点引线：从标签右边缘到槽中主干 */
+.mm ul.children::before{
+  content:"";position:absolute;left:0;top:50%;width:18px;height:2px;
+  background:var(--c,#94a3b8);opacity:.5;
+}
+.mm li.collapsed>ul.children{display:none}
+
+/* ---------- Labels ---------- */
+.label{
+  position:relative;display:inline-block;border-radius:var(--radius);
+  padding:6px 12px;background:#fff;border:1px solid var(--line);
+  max-width:320px;word-break:break-word;transition:.15s;
+}
+.label.has-kids{cursor:pointer;user-select:none}
+.label.has-kids::after{
+  content:"+";position:absolute;right:-9px;top:50%;transform:translateY(-50%);
+  width:17px;height:17px;line-height:15px;text-align:center;border-radius:50%;
+  background:#fff;border:1px solid var(--line);color:var(--muted);font-size:13px;
+}
+li.collapsed>.label.has-kids::after{content:"+"}
+li:not(.collapsed)>.label.has-kids::after{content:"\2013"}
+li.collapsed>.label{box-shadow:0 0 0 3px rgba(148,163,184,.14)}
+
+/* root */
+li.d0>.label{
+  background:#0f172a;color:#fff;border-color:#0f172a;font-size:17px;font-weight:700;
+  padding:14px 18px;max-width:230px;box-shadow:var(--shadow);
+}
+/* level 1 = 8 大类 */
+li.d1>.label{
+  background:var(--c);color:#fff;border-color:transparent;font-weight:600;font-size:14.5px;
+  max-width:250px;box-shadow:0 4px 14px -8px var(--c);
+}
+/* level 2 */
+li.d2>.label{
+  background:#fbfdff;border-left:4px solid var(--c);font-weight:600;font-size:14px;
+  max-width:300px;color:#1e293b;
+}
+/* level 3 */
+/* 叶子节点用卡片承载：引线接在卡片边缘，不再压到文字上 */
+li.d3>.label{
+  background:#f8fafc;border:1px solid var(--line);border-left:3px solid var(--c);
+  border-radius:8px;padding:5px 12px;font-size:13.4px;color:#334155;max-width:390px;
+}
+li.d3>.label.has-kids::after{
+  width:15px;height:15px;line-height:13px;font-size:12px;right:-8px;
+}
+li.d3>.label.hit{background:var(--hit)!important}
+
+/* 拓展标识 */
+.label .badge{
+  display:inline-block;margin-left:6px;vertical-align:1px;
+  font-size:11px;line-height:1.5;padding:1px 7px;border-radius:999px;
+  background:rgba(13,148,136,.12);color:var(--ext);border:1px solid rgba(13,148,136,.32);
+  white-space:nowrap;font-weight:600;
+}
+/* 落在饱和彩色一级分支上的拓展标签，改用半透明白底保证对比度 */
+li.d1>.label .badge{
+  margin-left:8px;background:rgba(15,23,42,.55);color:#fff;
+  border-color:rgba(255,255,255,.45);text-shadow:none;
+}
+.label .warn{color:#b45309;font-weight:600}
+.label .cnt{
+  display:inline-block;margin-left:6px;font-size:11.5px;color:var(--muted);
+  background:#f1f5f9;border-radius:999px;padding:0 7px;vertical-align:1px;
+}
+
+/* 高亮与聚焦 */
+.label.hit{background:var(--hit)!important;border-color:#eab308!important;box-shadow:0 0 0 3px rgba(234,179,8,.25)}
+body[data-focus="orig"] li.is-ext>.label{opacity:.3}
+body[data-focus="ext"] li.node:not(.is-ext)>.label{opacity:.32}
+body[data-focus="orig"] li.is-ext>.label.hit,
+body[data-focus="ext"] li.node:not(.is-ext)>.label.hit{opacity:1}
+
+/* ---------- Outline mode ---------- */
+body.mode-outline .board{padding:22px 26px;overflow:visible;max-height:none}
+/* 卡片模式：完全不用连接线，靠缩进 + 卡片 + 左侧色条表达层级 */
+body.mode-outline .mm ul.children{
+  display:block;padding-left:18px;margin-left:0;border-left:0;
+}
+/* 必须高于上方 display:block 的优先级，否则卡片模式下折叠会失效 */
+body.mode-outline .mm li.collapsed>ul.children{display:none}
+body.mode-outline .mm ul.children>li.node{padding:0}
+body.mode-outline .mm ul.children>li.node::before,
+body.mode-outline .mm ul.children>li.node::after,
+body.mode-outline .mm ul.children::before{display:none}
+body.mode-outline .mm li.node{display:block}
+body.mode-outline .label{display:block;max-width:none;margin:4px 0;border-radius:10px}
+body.mode-outline li.d0>.label{font-size:18px;margin-bottom:14px;padding:14px 18px}
+body.mode-outline li.d1>.label{font-size:15px;margin:20px 0 8px;padding:10px 14px}
+body.mode-outline li.d2>.label{font-size:14px;margin-top:10px;padding:8px 12px;background:#fff}
+body.mode-outline li.d3>.label{
+  padding:6px 12px;color:#475569;max-width:none;background:#f8fafc;
+}
+body.mode-outline .label.has-kids::after{position:static;transform:none;display:inline-block;margin-left:8px;right:auto}
+
+/* ---------- Footer ---------- */
+.foot{
+  border-top:1px solid var(--line);background:#fff;
+  padding:30px 24px 46px;margin-top:8px;
+}
+.foot .wrap{max-width:1320px;margin:0 auto;font-size:13px;color:var(--muted);line-height:1.85}
+.foot h2{font-size:15px;color:var(--ink);margin:0 0 10px}
+.foot ul{margin:8px 0 0;padding-left:20px}
+.foot code{
+  background:#f1f5f9;border:1px solid var(--line);border-radius:5px;
+  padding:1px 5px;font-size:12.5px;color:#0f172a;
+}
+.note{
+  background:#fffbeb;border:1px solid #fde68a;border-radius:10px;
+  padding:12px 14px;color:#78350f;margin-top:12px;font-size:13px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width:900px){
+  .hero{padding:34px 18px 28px}
+  .hero h1{font-size:22px}
+  .canvas{padding:14px 12px 48px}
+  .board{padding:16px 14px;border-radius:12px}
+  .legend{padding:14px 12px 0}
+  .stat{display:none}
+}
+
+/* ---------- Print ---------- */
+@media print{
+  .toolbar,.hero .meta{display:none}
+  body{background:#fff}
+  .board{box-shadow:none;border:0;overflow:visible;max-height:none}
+  .label .badge{border-color:#0d9488}
+  .hero{background:#0f172a!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+
+
+/* ============ 工作台统一导航（内嵌，样式自包含，不引用页面变量） ============ */
+.wb-topbar{
+  position:sticky;top:0;z-index:60;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  padding:10px 22px;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid #d9e6f2;
+}
+.wb-topbar .wb-brand{display:flex;align-items:center;gap:10px}
+.wb-topbar .wb-mark{
+  width:36px;height:36px;border-radius:9px;flex-shrink:0;
+  background:linear-gradient(135deg,#2E5A88 0%,#1F3A5F 100%);
+  color:#fff;font-weight:700;font-size:17px;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 1px 3px rgba(31,58,95,.06),0 4px 16px rgba(31,58,95,.06);
+}
+.wb-topbar .wb-brand-text{display:flex;flex-direction:column;line-height:1.25}
+.wb-topbar .wb-brand-text strong{font-size:15px;color:#1F3A5F;font-weight:600}
+.wb-topbar .wb-brand-text span{font-size:11px;color:#5A7391}
+.wb-topbar .wb-tabs{display:flex;gap:6px;background:#F6FAFE;padding:4px;border-radius:10px;border:1px solid #D9E6F2}
+.wb-topbar .wb-tab{
+  display:inline-block;text-decoration:none;
+  padding:7px 16px;border-radius:7px;
+  color:#5A7391;font-size:13.5px;font-weight:500;
+  transition:all .15s ease;white-space:nowrap;
+}
+.wb-topbar .wb-tab:hover{color:#2E5A88}
+.wb-topbar .wb-tab.on{background:#2E5A88;color:#fff;box-shadow:0 2px 8px rgba(46,90,136,.35)}
+.wb-topbar .wb-print{
+  margin-left:auto;border:1px solid #D9E6F2;background:#fff;color:#5A7391;
+  padding:7px 13px;border-radius:9px;font-size:13px;cursor:pointer;
+  font-family:inherit;transition:all .15s ease;
+}
+.wb-topbar .wb-print:hover{color:#2E5A88;border-color:#2E5A88}
+/* 原工具栏下移至导航栏正下方（高度由 JS 动态测量写入 --wb-topbar-h） */
+.toolbar{top:var(--wb-topbar-h,67px);z-index:40}
+@media (max-width:768px){
+  .wb-topbar{gap:10px;padding:10px 14px}
+  .wb-topbar .wb-brand-text span{display:none}
+  .wb-topbar .wb-tabs{order:3;width:100%}
+  .wb-topbar .wb-tab{flex:1;text-align:center}
+  .toolbar{position:static;top:auto}
+}
+@media print{
+  .wb-topbar{display:none!important}
+  .toolbar{position:static;top:auto}
+}
+</style>
+</head>
+<body data-total="198" data-src="38" data-ext="160">
+
+<nav class="wb-topbar" aria-label="工作台导航">
+  <div class="wb-brand">
+    <span class="wb-mark">运</span>
+    <div class="wb-brand-text">
+      <strong>国际站运营工作台</strong>
+      <span>Alibaba.com Operation Workbench · 2026</span>
+    </div>
+  </div>
+  <div class="wb-tabs">
+    <a class="wb-tab" href="sop.html">运营 SOP 2026</a>
+    <a class="wb-tab" href="keyword.html">关键词调整路径</a>
+    <a class="wb-tab on" href="rfq.html" aria-current="page">RFQ 报价指南</a>
+  </div>
+  <button class="wb-print" type="button" onclick="window.print()">打印</button>
+</nav>
+
+
+<header class="hero">
+  <div class="wrap">
+    <span class="kicker">Alibaba.com &middot; RFQ Playbook</span>
+    <h1>阿里国际站 RFQ 报价全流程实操技巧</h1>
+    <p class="sub">从商机精准筛选、报价时效与表单优化、内容差异化入围，到主动引导客户回复与报价后二次跟进的完整 SOP；并基于阿里巴巴国际站官方知识库补充 2026 年最新规则要点与口径校准。</p>
+    <div class="meta">
+      <span class="chip">节点总数 <b>198</b></span>
+      <span class="chip">一级分支 <b>8</b></span>
+      <span class="chip">原图节点 <b>38</b></span>
+      <span class="chip">2026 拓展 <b>160</b></span>
+      <span class="chip">来源 <b>国际站官方 FAQ 知识库</b></span>
+      <span class="chip">口径检索日 <b>2026-09-16</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="toolbar">
+  <div class="wrap">
+    <div class="seg" role="group" aria-label="视图模式">
+      <button class="btn" id="mode-map" type="button">导图</button>
+      <button class="btn" id="mode-outline" type="button">卡片</button>
+    </div>
+    <div class="seg" role="group" aria-label="折叠控制">
+      <button class="btn" id="btn-expand" type="button">展开全部</button>
+      <button class="btn" id="btn-collapse" type="button">收起全部</button>
+    </div>
+    <div class="seg" role="group" aria-label="聚焦范围">
+      <button class="btn" id="focus-all" type="button">全部</button>
+      <button class="btn" id="focus-orig" type="button">突出原图</button>
+      <button class="btn" id="focus-ext" type="button">突出拓展</button>
+    </div>
+    <input class="search" id="search" type="search" placeholder="搜索节点关键字（快捷键 / ）" autocomplete="off" aria-label="搜索节点">
+    <span class="stat" id="stat"></span>
+  </div>
+</div>
+
+<div class="legend">
+  <span class="key"><i class="dot" style="background:#2563eb"></i>一级分支（原图 6 类 + 新增 2 类）</span>
+  <span class="key"><i class="dot" style="background:#0d9488"></i>2026 拓展节点</span>
+  <span class="key"><i class="dot" style="background:#b45309"></i>官方口径提示 / 冲突</span>
+  <span class="key">点击带 <b>+</b> 的节点可折叠或展开；若觉得连接线干扰阅读，可切到「卡片」模式</span>
+</div>
+
+<main class="canvas">
+  <div class="board" id="board">
+<ul class="mm"><li class="node d0" style="--c:#0f172a"><div class="label" data-text="阿里国际站RFQ报价全流程实操技巧">阿里国际站RFQ报价全流程实操技巧</div><ul class="children"><li class="node d1 has-kids" style="--c:#2563eb"><div class="label has-kids" data-text="一、商机精准筛选（拒绝无效抢盘）">一、商机精准筛选（拒绝无效抢盘）<span class="cnt">36 条</span></div><ul class="children"><li class="node d2 has-kids" style="--c:#2563eb"><div class="label has-kids" data-text="优先优质询盘标准">优先优质询盘标准</div><ul class="children"><li class="node d3" style="--c:#2563eb"><div class="label" data-text="发布时效：3天内新发需求">发布时效：3天内新发需求</div></li><li class="node d3" style="--c:#2563eb"><div class="label" data-text="买家等级：银牌及以上买家">买家等级：银牌及以上买家</div></li><li class="node d3" style="--c:#2563eb"><div class="label" data-text="买家数据核查：历史成交多、RFQ互动活跃=高采购意愿">买家数据核查：历史成交多、RFQ互动活跃=高采购意愿</div></li></ul></li><li class="node d2" style="--c:#2563eb"><div class="label" data-text="垃圾询盘直接放弃，不消耗报价额度">垃圾询盘直接放弃，不消耗报价额度</div></li><li class="node d2 has-kids" style="--c:#2563eb"><div class="label has-kids" data-text="商机实时捕捉设置">商机实时捕捉设置</div><ul class="children"><li class="node d3" style="--c:#2563eb"><div class="label" data-text="填满关键词订阅位：场景词+买家热搜词">填满关键词订阅位：场景词+买家热搜词</div></li><li class="node d3" style="--c:#2563eb"><div class="label" data-text="全开消息提醒，第一时间接收新RFQ推送">全开消息提醒，第一时间接收新RFQ推送</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#2563eb"><div class="label has-kids" data-text="买家分层校准：官方口径为 L0–L4，不存在「银牌/金牌买家」">买家分层校准：官方口径为 L0–L4，不存在「银牌/金牌买家」<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="L4 百万买家：企业认证且年营业额&gt;100万美金，或近365天站内采购30万美金">L4 百万买家：企业认证且年营业额&gt;100万美金，或近365天站内采购30万美金</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="L3 企业买家：年营业额&gt;50万美金，或近365天累计采购1万美金/单笔&gt;5000美金">L3 企业买家：年营业额&gt;50万美金，或近365天累计采购1万美金/单笔&gt;5000美金</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="L2 优质B买：近365天采购300美金／企业认证且年营业额&lt;50万／站内B类属性行为识别">L2 优质B买：近365天采购300美金／企业认证且年营业额&lt;50万／站内B类属性行为识别</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="L1 潜力买家：近365天采购50美金／填写过公司信息">L1 潜力买家：近365天采购50美金／填写过公司信息</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="L0 注册买家：无分层标识">L0 注册买家：无分层标识</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="标识可见位置：沟通界面、RFQ界面、访客详情、客户列表、订单">标识可见位置：沟通界面、RFQ界面、访客详情、客户列表、订单</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="更新频率：实时更新，商家侧 T+2 延迟；以「阿里卖家-客户信息页」为准">更新频率：实时更新，商家侧 T+2 延迟；以「阿里卖家-客户信息页」为准</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="客户通列表目前仅支持筛选 L1+ 买家">客户通列表目前仅支持筛选 L1+ 买家</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#2563eb"><div class="label has-kids" data-text="商机分层（金/银/铜）判定标准">商机分层（金/银/铜）判定标准<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="金商机：商机质量分≥70 且买家等级为 L4 或买家交易力强">金商机：商机质量分≥70 且买家等级为 L4 或买家交易力强</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="银商机：买家等级为 L2/L3，或商机质量分≥70">银商机：买家等级为 L2/L3，或商机质量分≥70</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="铜商机：商机质量分&lt;70 且符合严肃商机需求发布规则">铜商机：商机质量分&lt;70 且符合严肃商机需求发布规则</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="金商机提报门槛：仅金品商家与出口通三星及以上商家可提报">金商机提报门槛：仅金品商家与出口通三星及以上商家可提报</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="概念纠偏：金银牌是「商机分层」而非买家等级，金商机买家可能并非 L4">概念纠偏：金银牌是「商机分层」而非买家等级，金商机买家可能并非 L4</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#2563eb"><div class="label has-kids" data-text="订阅位与推送机制（官方硬数据）">订阅位与推送机制（官方硬数据）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="上限：最多 5 个类目 + 24 个关键词">上限：最多 5 个类目 + 24 个关键词</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="主账号与子账号共用，无法分别设置">主账号与子账号共用，无法分别设置</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="修改后需 24–48 小时更新同步">修改后需 24–48 小时更新同步</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="命中订阅关键词的 RFQ 在市场中字体标黄显示">命中订阅关键词的 RFQ 在市场中字体标黄显示</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="微信通知入口：My Alibaba-商机沟通-商机订阅-微信通知">微信通知入口：My Alibaba-商机沟通-商机订阅-微信通知</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="推送限制：仅推送新发金商机与银牌优享商机，无对应报价权则不推送">推送限制：仅推送新发金商机与银牌优享商机，无对应报价权则不推送</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="市场同步：买家RFQ审核通过后最长24小时内同步，无固定更新时间">市场同步：买家RFQ审核通过后最长24小时内同步，无固定更新时间</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#2563eb"><div class="label has-kids" data-text="曝光前置门槛">曝光前置门槛<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="市场推荐仅按主营/订阅/常报价类目推荐，不展示全部商机">市场推荐仅按主营/订阅/常报价类目推荐，不展示全部商机</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="已报过价的 RFQ 搜索不到">已报过价的 RFQ 搜索不到</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="报满的 RFQ 搜索不到（有畅行权益报满10条仍可搜到，报满15条搜不到）">报满的 RFQ 搜索不到（有畅行权益报满10条仍可搜到，报满15条搜不到）</div></li><li class="node d3 is-ext" style="--c:#2563eb"><div class="label" data-text="银牌优享商机头 1 小时，无对应权益的商家搜不到">银牌优享商机头 1 小时，无对应权益的商家搜不到</div></li></ul></li></ul></li><li class="node d1 has-kids" style="--c:#16a34a"><div class="label has-kids" data-text="二、报价时效与基础表单优化">二、报价时效与基础表单优化<span class="cnt">29 条</span></div><ul class="children"><li class="node d2 has-kids" style="--c:#16a34a"><div class="label has-kids" data-text="报价时间策略">报价时间策略</div><ul class="children"><li class="node d3" style="--c:#16a34a"><div class="label" data-text="卡准买家当地工作时段报价，排名曝光更靠前">卡准买家当地工作时段报价，排名曝光更靠前</div></li><li class="node d3" style="--c:#16a34a"><div class="label" data-text="人力不足开启智能托管自动报价">人力不足开启智能托管自动报价</div></li></ul></li><li class="node d2" style="--c:#16a34a"><div class="label" data-text="报价标题吸睛：突出工厂直供、交货快速">报价标题吸睛：突出工厂直供、交货快速</div></li><li class="node d2 has-kids" style="--c:#16a34a"><div class="label has-kids" data-text="表单填写规范">表单填写规范</div><ul class="children"><li class="node d3" style="--c:#16a34a"><div class="label" data-text="完整填充所有信息，保存模板一键复用">完整填充所有信息，保存模板一键复用</div></li><li class="node d3" style="--c:#16a34a"><div class="label" data-text="精简内容，只保留客户核心关注点：价格、质量、交付">精简内容，只保留客户核心关注点：价格、质量、交付</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#16a34a"><div class="label has-kids" data-text="官方时效硬数据">官方时效硬数据<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="6 小时内报价：回复率是 6 小时后的近 2 倍（建议 3–6 小时内报）">6 小时内报价：回复率是 6 小时后的近 2 倍（建议 3–6 小时内报）</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="12 小时内报价可提升 RFQ 服务分（服务分含「报价速度」指标）">12 小时内报价可提升 RFQ 服务分（服务分含「报价速度」指标）</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="无法定时报价：报满即失效，看到合适商机应立即报价">无法定时报价：报满即失效，看到合适商机应立即报价</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="商机释放按 business hours（早9—晚18）：凌晨12点发布的商机需延后释放">商机释放按 business hours（早9—晚18）：凌晨12点发布的商机需延后释放</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#16a34a"><div class="label has-kids" data-text="排序与曝光（官方披露口径）">排序与曝光（官方披露口径）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="买家侧报价列表排序直接决定曝光与深度沟通机会">买家侧报价列表排序直接决定曝光与深度沟通机会</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="每个 RFQ 有 3 个报价置顶坑位（用置顶权益可排前3位）">每个 RFQ 有 3 个报价置顶坑位（用置顶权益可排前3位）</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="提升报价相关度＝让买家更优先看到报价">提升报价相关度＝让买家更优先看到报价</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="点赞逻辑：报价内容相关度 + 历史RFQ报价表现 + 买家端横向对比">点赞逻辑：报价内容相关度 + 历史RFQ报价表现 + 买家端横向对比</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="报价对比标签4维度：年限最久／较有竞争力／发货最快／是否金品">报价对比标签4维度：年限最久／较有竞争力／发货最快／是否金品</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="⚠ 买家端完整排序公式与权重未公开（知识库未返回）"><span class="warn">⚠</span> 买家端完整排序公式与权重未公开（知识库未返回）</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#16a34a"><div class="label has-kids" data-text="RFQ 服务分机制">RFQ 服务分机制<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="衡量维度：报价数量、报价速度、报价质量、买家承接能力（公司维度）">衡量维度：报价数量、报价速度、报价质量、买家承接能力（公司维度）</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="分值越高 → 权益越多 + 越优质的 RFQ 优先报价权">分值越高 → 权益越多 + 越优质的 RFQ 优先报价权</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="更新节奏：每月 3 日（PST）更新，统计上一自然月最后一天数据">更新节奏：每月 3 日（PST）更新，统计上一自然月最后一天数据</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="服务分 ≥80 分可获得无限制的金牌商机报价权益">服务分 ≥80 分可获得无限制的金牌商机报价权益</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#16a34a"><div class="label has-kids" data-text="报价模板与审核规则">报价模板与审核规则<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="保存上限 30 个；主账号与各子账号创建的模板可共用">保存上限 30 个；主账号与各子账号创建的模板可共用</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="复用路径：填写报价表单上方「我的报价模板」">复用路径：填写报价表单上方「我的报价模板」</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="易踩坑：产品信息更新后，报价模板不会自动同步，需手动修改">易踩坑：产品信息更新后，报价模板不会自动同步，需手动修改</div></li><li class="node d3 is-ext" style="--c:#16a34a"><div class="label" data-text="审核时效一般 2 个工作日（节假日顺延），不通过多为买家修改了报价需求">审核时效一般 2 个工作日（节假日顺延），不通过多为买家修改了报价需求</div></li></ul></li></ul></li><li class="node d1 has-kids" style="--c:#d97706"><div class="label has-kids" data-text="三、报价内容差异化，碾压同行入围">三、报价内容差异化，碾压同行入围<span class="cnt">25 条</span></div><ul class="children"><li class="node d2 has-kids" style="--c:#d97706"><div class="label has-kids" data-text="核心实力佐证（不止单纯报价格）">核心实力佐证（不止单纯报价格）</div><ul class="children"><li class="node d3" style="--c:#d97706"><div class="label" data-text="工厂产能、产品各类认证、过往代工成功案例">工厂产能、产品各类认证、过往代工成功案例</div></li><li class="node d3" style="--c:#d97706"><div class="label" data-text="附上成交单据，增强信任">附上成交单据，增强信任</div></li></ul></li><li class="node d2" style="--c:#d97706"><div class="label" data-text="增值服务加分项：免费图纸、远程技术指导">增值服务加分项：免费图纸、远程技术指导</div></li><li class="node d2" style="--c:#d97706"><div class="label" data-text="配套两套物流方案供客户选择">配套两套物流方案供客户选择</div></li><li class="node d2" style="--c:#d97706"><div class="label" data-text="定价策略：不卡死高价，预留合理议价空间">定价策略：不卡死高价，预留合理议价空间</div></li><li class="node d2" style="--c:#d97706"><div class="label" data-text="平台规则：首轮仅筛选2-4家入围，性价比优先">平台规则：首轮仅筛选2-4家入围，性价比优先</div></li><li class="node d2 is-ext has-kids" style="--c:#d97706"><div class="label has-kids" data-text="⚠ 官方口径校准（原图两处说法未获官方支持）"><span class="warn">⚠</span> 官方口径校准（原图两处说法未获官方支持）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="「首轮仅筛选2-4家入围」→ 知识库未返回该规则">「首轮仅筛选2-4家入围」→ 知识库未返回该规则</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="官方披露的容量口径是「报价席位上限」，而非首轮展示家数">官方披露的容量口径是「报价席位上限」，而非首轮展示家数</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="「性价比」→ 知识库无独立筛选维度定义，最接近的是对比标签「较有竞争力」">「性价比」→ 知识库无独立筛选维度定义，最接近的是对比标签「较有竞争力」</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#d97706"><div class="label has-kids" data-text="报价席位上限（官方硬数据）">报价席位上限（官方硬数据）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="行业甄选商机：8 席；使用畅行权益最多可报 12 条">行业甄选商机：8 席；使用畅行权益最多可报 12 条</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="机械/新能源/家装建材行业金商机：8 席；畅行最多 12 条">机械/新能源/家装建材行业金商机：8 席；畅行最多 12 条</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="其他商机：10 席；畅行最多 15 条">其他商机：10 席；畅行最多 15 条</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="每条商机限 3 个托管报价坑位、3 个置顶坑位">每条商机限 3 个托管报价坑位、3 个置顶坑位</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#d97706"><div class="label has-kids" data-text="买家可设的报价前置条件（决定能否入围）">买家可设的报价前置条件（决定能否入围）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="区域限制：非指定区域供应商提示无法报价">区域限制：非指定区域供应商提示无法报价</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="经营模式、公司规模限制">经营模式、公司规模限制</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="仅允许开通信用保障的用户报价">仅允许开通信用保障的用户报价</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="指定需为金品认证的 Multispecialty supplier（符合时报价页显示该标签）">指定需为金品认证的 Multispecialty supplier（符合时报价页显示该标签）</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#d97706"><div class="label has-kids" data-text="报价内容合规与禁忌">报价内容合规与禁忌<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="报价留言不得包含 emoji 等特殊字符">报价留言不得包含 emoji 等特殊字符</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="报价标题建议精简：突出产品名称 + 符合买家要求的属性">报价标题建议精简：突出产品名称 + 符合买家要求的属性</div></li><li class="node d3 is-ext" style="--c:#d97706"><div class="label" data-text="报价不通过通常因买家修改需求，编辑后重新提交不重复消耗权益">报价不通过通常因买家修改需求，编辑后重新提交不重复消耗权益</div></li></ul></li></ul></li><li class="node d1 has-kids" style="--c:#dc2626"><div class="label has-kids" data-text="四、主动引导，提高客户回复率">四、主动引导，提高客户回复率<span class="cnt">16 条</span></div><ul class="children"><li class="node d2 has-kids" style="--c:#dc2626"><div class="label has-kids" data-text="报价内主动抛出提问，打破单向沟通">报价内主动抛出提问，打破单向沟通</div><ul class="children"><li class="node d3" style="--c:#dc2626"><div class="label" data-text="询问首单采购预估数量">询问首单采购预估数量</div></li><li class="node d3" style="--c:#dc2626"><div class="label" data-text="确认客户偏好付款方式">确认客户偏好付款方式</div></li><li class="node d3" style="--c:#dc2626"><div class="label" data-text="索要完整收货地址">索要完整收货地址</div></li><li class="node d3" style="--c:#dc2626"><div class="label" data-text="确认达成意向后的下单周期">确认达成意向后的下单周期</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#dc2626"><div class="label has-kids" data-text="官方辅助报价（AI 生成文案）">官方辅助报价（AI 生成文案）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="文案构成：公司优势 + 报价商品卖点 + 回答买家提问 + 引导买家细化需求">文案构成：公司优势 + 报价商品卖点 + 回答买家提问 + 引导买家细化需求</div></li><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="公司优势数据来源：MA后台-店铺管理-管理公司信息-公司核心优势">公司优势数据来源：MA后台-店铺管理-管理公司信息-公司核心优势</div></li><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="计费：生成文案不消耗 i豆；提交时正常消耗报价权益">计费：生成文案不消耗 i豆；提交时正常消耗报价权益</div></li><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="定位：仅生成文案、不自动提交，需商家确认">定位：仅生成文案、不自动提交，需商家确认</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#dc2626"><div class="label has-kids" data-text="3 种官方风格模板（2026-01-26 起）">3 种官方风格模板（2026-01-26 起）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="经典版：正式详尽，含公司介绍与产品介绍，结尾询问买家需求细节">经典版：正式详尽，含公司介绍与产品介绍，结尾询问买家需求细节</div></li><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="产品报价版：强调产品卖点与价格（价格取自商品详情页），结尾询问需求细节">产品报价版：强调产品卖点与价格（价格取自商品详情页），结尾询问需求细节</div></li><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="实力展示版：强调公司实力与服务，推荐定制类需求或工厂型商家">实力展示版：强调公司实力与服务，推荐定制类需求或工厂型商家</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#dc2626"><div class="label has-kids" data-text="「调整留言」二次自定义（2026-01-26 全量上线）">「调整留言」二次自定义（2026-01-26 全量上线）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#dc2626"><div class="label" data-text="示例指令：简短点／告诉买家我有现货／强调产品的证书信息／询问买家想要的机器功率">示例指令：简短点／告诉买家我有现货／强调产品的证书信息／询问买家想要的机器功率</div></li></ul></li></ul></li><li class="node d1 has-kids" style="--c:#7c3aed"><div class="label has-kids" data-text="五、报价后二次跟进动作">五、报价后二次跟进动作<span class="cnt">12 条</span></div><ul class="children"><li class="node d2" style="--c:#7c3aed"><div class="label" data-text="跟进时间节点：报价隔天未读/无回复立刻行动">跟进时间节点：报价隔天未读/无回复立刻行动</div></li><li class="node d2" style="--c:#7c3aed"><div class="label" data-text="跟进素材：产品实拍图、工厂车间生产视频补发">跟进素材：产品实拍图、工厂车间生产视频补发</div></li><li class="node d2 is-ext has-kids" style="--c:#7c3aed"><div class="label has-kids" data-text="报价消息的触达形态（容易漏跟进）">报价消息的触达形态（容易漏跟进）<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="RFQ 报价不生成询盘，改为轻量化卡片展示在 TM 列表">RFQ 报价不生成询盘，改为轻量化卡片展示在 TM 列表</div></li><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="报价记录不再显示在询盘列表，需前往 TM 消息管理器查看">报价记录不再显示在询盘列表，需前往 TM 消息管理器查看</div></li><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="未采纳会收到通知，可据此与买家沟通未采纳原因">未采纳会收到通知，可据此与买家沟通未采纳原因</div></li><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="报价记录仅保留最近 3 个月，更早记录在【报价管理】-「历史」查看">报价记录仅保留最近 3 个月，更早记录在【报价管理】-「历史」查看</div></li><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="GMV 统计口径：RFQ 为近 90 天实收">GMV 统计口径：RFQ 为近 90 天实收</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#7c3aed"><div class="label has-kids" data-text="买家联系方式可见性">买家联系方式可见性<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="未报价、报价未通过审核 → 看不到买家联系方式">未报价、报价未通过审核 → 看不到买家联系方式</div></li><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="审核通过后还需买家发布时设置了公开（business card）">审核通过后还需买家发布时设置了公开（business card）</div></li><li class="node d3 is-ext" style="--c:#7c3aed"><div class="label" data-text="联系方式统一在 buyer profile 页面查看，报价成功通知邮件不显示">联系方式统一在 buyer profile 页面查看，报价成功通知邮件不显示</div></li></ul></li></ul></li><li class="node d1 has-kids" style="--c:#0891b2"><div class="label has-kids" data-text="六、核心总结&amp;下期预告">六、核心总结&amp;下期预告<span class="cnt">10 条</span></div><ul class="children"><li class="node d2" style="--c:#0891b2"><div class="label" data-text="核心逻辑：标准化流程落地，坚持操作提升回复、转化">核心逻辑：标准化流程落地，坚持操作提升回复、转化</div></li><li class="node d2" style="--c:#0891b2"><div class="label" data-text="下期内容：阿里国际站运营每日工作安排">下期内容：阿里国际站运营每日工作安排</div></li><li class="node d2 is-ext has-kids" style="--c:#0891b2"><div class="label has-kids" data-text="本文档事实来源与覆盖缺口">本文档事实来源与覆盖缺口<span class="badge">2026拓展</span></div><ul class="children"><li class="node d3 is-ext" style="--c:#0891b2"><div class="label" data-text="来源：国际站官方 FAQ 知识库（workctl icbu cco icbu-faq-knowledge-chunk），2026-09-16 检索 15 次，去重后 120 条官方 QA">来源：国际站官方 FAQ 知识库（workctl icbu cco icbu-faq-knowledge-chunk），2026-09-16 检索 15 次，去重后 120 条官方 QA</div></li><li class="node d3 is-ext" style="--c:#0891b2"><div class="label" data-text="出处标识：文档标题 + kCode + 知识库最后更新时间（接口不返回 URL，无法给出外链）">出处标识：文档标题 + kCode + 知识库最后更新时间（接口不返回 URL，无法给出外链）</div></li><li class="node d3 is-ext" style="--c:#0891b2"><div class="label" data-text="缺口1：「首轮仅展示 2-4 家」入围/展示上限 → 知识库未返回">缺口1：「首轮仅展示 2-4 家」入围/展示上限 → 知识库未返回</div></li><li class="node d3 is-ext" style="--c:#0891b2"><div class="label" data-text="缺口2：买家端报价列表完整排序算法与权重 → 知识库未返回">缺口2：买家端报价列表完整排序算法与权重 → 知识库未返回</div></li><li class="node d3 is-ext" style="--c:#0891b2"><div class="label" data-text="缺口3：「性价比」作为独立筛选维度的官方定义 → 知识库未返回">缺口3：「性价比」作为独立筛选维度的官方定义 → 知识库未返回</div></li><li class="node d3 is-ext" style="--c:#0891b2"><div class="label" data-text="缺口4：2026 年 RFQ 统一规则变更公告 → 知识库未返回（最近一次机制升级公示为 2025-04-15）">缺口4：2026 年 RFQ 统一规则变更公告 → 知识库未返回（最近一次机制升级公示为 2025-04-15）</div></li><li class="node d3 is-ext" style="--c:#0891b2"><div class="label" data-text="缺口5：「银牌买家/金牌买家」称谓 → 知识库未返回（官方为 L0–L4 买家分层 + 金/银/铜商机分层）">缺口5：「银牌买家/金牌买家」称谓 → 知识库未返回（官方为 L0–L4 买家分层 + 金/银/铜商机分层）</div></li></ul></li></ul></li><li class="node d1 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="七、报价额度与权益账本（2026 官方口径）">七、报价额度与权益账本（2026 官方口径）<span class="badge">2026拓展</span><span class="cnt">38 条</span></div><ul class="children"><li class="node d2 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="基础权益发放与有效期">基础权益发放与有效期</div><ul class="children"><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="每月共 20 条：1 号、15 号 0 点（PST）各发放 10 条">每月共 20 条：1 号、15 号 0 点（PST）各发放 10 条</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="不区分主账号、子账号，不能主动分配权益给子账号">不区分主账号、子账号，不能主动分配权益给子账号</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="有效期：1 号发放→当月 15 号 0 点过期；15 号发放→次月 1 号 0 点过期">有效期：1 号发放→当月 15 号 0 点过期；15 号发放→次月 1 号 0 点过期</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="消耗顺序：按权益到期时间，优先消耗最先到期的权益">消耗顺序：按权益到期时间，优先消耗最先到期的权益</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="消耗规则">消耗规则</div><ul class="children"><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="提交即消耗，无论报价是否审核通过">提交即消耗，无论报价是否审核通过</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="审核不通过后编辑再提交，不重复消耗">审核不通过后编辑再提交，不重复消耗</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="金商机＝1 条金商机权益 + 3 条报价权益">金商机＝1 条金商机权益 + 3 条报价权益</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="银商机＝2 条报价权益（建材/新能源/机械），其余行业口径为 1 条">银商机＝2 条报价权益（建材/新能源/机械），其余行业口径为 1 条</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="铜商机＝1 条报价权益">铜商机＝1 条报价权益</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="金商机特殊限制：基础报价权益为 0 时，即使有金商机条数也无法报金商机">金商机特殊限制：基础报价权益为 0 时，即使有金商机条数也无法报金商机</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="一签多店铺：同一公司不同店铺报同一条 RFQ，会消耗两条权益">一签多店铺：同一公司不同店铺报同一条 RFQ，会消耗两条权益</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="各能力计费口径">各能力计费口径</div><ul class="children"><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="辅助报价：生成文案不消耗 i豆，提交时正常消耗报价权益">辅助报价：生成文案不消耗 i豆，提交时正常消耗报价权益</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="智能托管：无数量限制，消耗 5 i豆/次 + RFQ 权益">智能托管：无数量限制，消耗 5 i豆/次 + RFQ 权益</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="会员与门槛差异">会员与门槛差异</div><ul class="children"><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="免费会员：需购买基础包（加油包）才能报价，暂无购买数量上限">免费会员：需购买基础包（加油包）才能报价，暂无购买数量上限</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="付费会员（出口通/全球宝/金品诚企/全球金牌供应商）：每月基础权益 20 条">付费会员（出口通/全球宝/金品诚企/全球金牌供应商）：每月基础权益 20 条</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="行业领袖 Pro 大会员：每月 1 号发放 225 条，有效期 3 个月，不可延期">行业领袖 Pro 大会员：每月 1 号发放 225 条，有效期 3 个月，不可延期</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="权益发放门槛：违规积分 &lt; 24 分，且知识产权侵权记录 &lt; 1 次">权益发放门槛：违规积分 &lt; 24 分，且知识产权侵权记录 &lt; 1 次</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="金牌商机权益：每月 3 号（PST）随服务分评定发放，条数不固定，有效期 1 个月">金牌商机权益：每月 3 号（PST）随服务分评定发放，条数不固定，有效期 1 个月</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="星等级 RFQ 报价权益：已于 2024 年 7 月起下架，无法领取">星等级 RFQ 报价权益：已于 2024 年 7 月起下架，无法领取</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="额度挽回路径（仅三条）">额度挽回路径（仅三条）</div><ul class="children"><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="垃圾商机举报返还：商机详情页【商机举报】成功后退回原账户">垃圾商机举报返还：商机详情页【商机举报】成功后退回原账户</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="托管误报返还：违规商机/类目错误/托管类目不一致，联系客服核实返权益（i豆不退）">托管误报返还：违规商机/类目错误/托管类目不一致，联系客服核实返权益（i豆不退）</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="发布账号违规注销：自动返还，发放明细备注 quotation restitution">发布账号违规注销：自动返还，发放明细备注 quotation restitution</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="注意：RFQ 报价后无法撤回（除垃圾商机举报路径外）">注意：RFQ 报价后无法撤回（除垃圾商机举报路径外）</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="无法报价的常见情形（警惕额度空转）">无法报价的常见情形（警惕额度空转）</div><ul class="children"><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="报价数量达上限、买家设置了区域/经营模式/公司规模等条件">报价数量达上限、买家设置了区域/经营模式/公司规模等条件</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="报价权限用完、违规与投诉导致权限受限、审核退回">报价权限用完、违规与投诉导致权限受限、审核退回</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="买家关闭 RFQ、同公司同事已报价">买家关闭 RFQ、同公司同事已报价</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="银商机 1 小时优先期内无法报价时，页面会显示倒计时">银商机 1 小时优先期内无法报价时，页面会显示倒计时</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#db2777"><div class="label has-kids" data-text="获取更多条数的官方路径">获取更多条数的官方路径</div><ul class="children"><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="提升 RFQ 服务分（报价分）">提升 RFQ 服务分（报价分）</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="GMV 挑战赛（月度，无须报名，后台做任务达标即领）">GMV 挑战赛（月度，无须报名，后台做任务达标即领）</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="购买 RFQ 加油包/基础包">购买 RFQ 加油包/基础包</div></li><li class="node d3 is-ext" style="--c:#db2777"><div class="label" data-text="参与限时活动与报价返金（每报价 3 条实时返还 1 条）">参与限时活动与报价返金（每报价 3 条实时返还 1 条）</div></li></ul></li></ul></li><li class="node d1 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="八、2026 年 RFQ 相关变更时间线">八、2026 年 RFQ 相关变更时间线<span class="badge">2026拓展</span><span class="cnt">23 条</span></div><ul class="children"><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-09-01">2026-09-01</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="产品信息修改后 RFQ 报价模板不会自动同步，需手动修改">产品信息修改后 RFQ 报价模板不会自动同步，需手动修改</div></li><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="(港臺GS) 买家分层标识展示逻辑：出口通 3 星以上可查看买家层级">(港臺GS) 买家分层标识展示逻辑：出口通 3 星以上可查看买家层级</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-07-15：Accio Work 生意助手插件-国际站商机雷达 Skill">2026-07-15：Accio Work 生意助手插件-国际站商机雷达 Skill</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="支持自然语言搜索与巡检 RFQ 采购商机、多关键词检索">支持自然语言搜索与巡检 RFQ 采购商机、多关键词检索</div></li><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="支持单条 RFQ 详情、单条报价记录详情（含买家是否查看/是否回复）">支持单条 RFQ 详情、单条报价记录详情（含买家是否查看/是否回复）</div></li><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="大范围搜索前会二次确认；优先消耗生意助手 i豆">大范围搜索前会二次确认；优先消耗生意助手 i豆</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-07-14：买家分层升级说明">2026-07-14：买家分层升级说明</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="买家分层由单一规则升级为 AI 深度学习智能研判，明确 L0–L4 五层定义">买家分层由单一规则升级为 AI 深度学习智能研判，明确 L0–L4 五层定义</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-05-22：买家分层标识变化说明">2026-05-22：买家分层标识变化说明</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="分层标识实时更新、商家侧 T+2 延迟、L0 无标识；需下载最新版阿里卖家">分层标识实时更新、商家侧 T+2 延迟、L0 无标识；需下载最新版阿里卖家</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-04-21：商机为什么搜索不到">2026-04-21：商机为什么搜索不到</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="报满的 RFQ 无法搜索到；无对应权益的银牌优享商机头 1 小时搜不到">报满的 RFQ 无法搜索到；无对应权益的银牌优享商机头 1 小时搜不到</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-04-01：金/银/铜商机标准与报价消耗口径">2026-04-01：金/银/铜商机标准与报价消耗口径</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="明确商机分层门槛与金商机提报门槛（仅金品与出口通三星及以上）">明确商机分层门槛与金商机提报门槛（仅金品与出口通三星及以上）</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-01-26：辅助报价能力升级">2026-01-26：辅助报价能力升级</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="支持报价内容自定义（「调整留言」）">支持报价内容自定义（「调整留言」）</div></li><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="正式发布经典版／产品报价版／实力展示版 3 套风格模板">正式发布经典版／产品报价版／实力展示版 3 套风格模板</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2026-01-16：银牌商机报价消耗口径">2026-01-16：银牌商机报价消耗口径</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="建材/新能源/机械行业消耗 2 条，其余行业消耗 1 条">建材/新能源/机械行业消耗 2 条，其余行业消耗 1 条</div></li></ul></li><li class="node d2 is-ext has-kids" style="--c:#475569"><div class="label has-kids" data-text="2025-04-15（最近一次机制升级公示，非 2026 年）">2025-04-15（最近一次机制升级公示，非 2026 年）</div><ul class="children"><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="行业甄选商机全行业开放">行业甄选商机全行业开放</div></li><li class="node d3 is-ext" style="--c:#475569"><div class="label" data-text="银牌商机提前 1 小时优先报价">银牌商机提前 1 小时优先报价</div></li></ul></li></ul></li></ul></li></ul>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <h2>数据来源与口径说明</h2>
+    <ul>
+      <li><b>原图节点</b>：来自《阿里国际站RFQ报价全流程实操技巧》思维导图（六个大类），文字逐字保留，未做改写。</li>
+      <li><b>拓展节点</b>：检索阿里巴巴国际站官方 FAQ 知识库（接口 <code>workctl icbu cco icbu-faq-knowledge-chunk</code>），检索日期 <b>2026-09-16</b>，执行 15 次检索，按 kCode 去重后获得 <b>120 条</b>官方 QA 片段。</li>
+      <li><b>出处标识</b>：该接口不返回 URL 字段，故以「文档标题 + kCode + 知识库最后更新时间」作为出处标识。</li>
+      <li><b>节点统计</b>：合计 198 个节点，其中原图 38 个、2026 拓展 160 个。</li>
+    </ul>
+
+    <div class="note">
+      <b>两处需要知悉的官方口径冲突</b>
+      <ul>
+        <li>原图「首轮仅筛选 2-4 家入围」：官方知识库<b>未返回</b>该规则。官方披露的容量口径是「报价席位上限」——行业甄选商机 8 席、机械/新能源/家装建材行业金商机 8 席、其他商机 10 席；使用畅行权益最多可报 12 / 12 / 15 条。</li>
+        <li>原图「性价比优先」：知识库<b>无</b>「性价比」作为独立筛选维度的官方定义；最接近的官方表述是报价对比标签中的「较有竞争力」（其余标签为年限最久、发货最快、是否金品）。</li>
+      </ul>
+    </div>
+
+    <h2 style="margin-top:22px">覆盖缺口（知识库未返回，未作推测补写）</h2>
+    <ul>
+      <li>「首轮仅展示 2-4 家」或等价的入围 / 展示上限规则。</li>
+      <li>买家端报价列表的完整排序算法与权重（报价时间 / 匹配度 / 买家偏好各占多少）。</li>
+      <li>「性价比」作为独立筛选维度的官方定义。</li>
+      <li>2026 年 RFQ 统一规则变更公告——最近一次「RFQ 商机及报价机制升级」公示为 2025-04-15（行业甄选商机全行业开放、银牌商机提前 1 小时优先报价）。</li>
+      <li>「银牌买家 / 金牌买家」这类买家等级称谓——官方口径为买家分层 L0–L4，金银牌属「商机分层」。</li>
+    </ul>
+
+    <h2 style="margin-top:22px">使用说明</h2>
+    <ul>
+      <li>顶部工具栏支持「导图 / 卡片」视图切换、展开/收起全部、按「原图 / 2026 拓展」聚焦，以及关键字高亮检索（快捷键 <code>/</code>，<code>Esc</code> 清空）。</li>
+      <li><b>导图模式</b>：连接线全部走节点左侧 36px 的独立槽位（父引线 0→18px、主干在 18px、子引线 18→36px），线条不进入标签区域；叶子节点以卡片承载，因此不存在线条压字的情况。<b>卡片模式</b>：完全不用连接线，靠缩进 + 卡片 + 左侧色条表达层级。</li>
+      <li>本页为<b>单文件、零外部依赖</b>（样式与脚本全部内联，无 CDN、无外部字体），可直接部署到 GitHub Pages 或任意静态托管。</li>
+    </ul>
+
+    <p style="margin-top:20px">本文档为运营培训整理，平台规则以阿里巴巴国际站官方最新公告为准。</p>
+  </div>
+</footer>
+
+<script>
+/* ===============================================================
+   阿里国际站 RFQ 报价全流程 · 交互脚本（无外部依赖）
+   内容已由生成器完整写入 HTML，JS 仅负责折叠 / 模式 / 搜索增强。
+   =============================================================== */
+(function () {
+  "use strict";
+
+  var body = document.body;
+  var board = document.getElementById("board");
+  var statEl = document.getElementById("stat");
+  var searchEl = document.getElementById("search");
+
+  var TOTAL = body.dataset.total || "0";
+  var SRC = body.dataset.src || "0";
+  var EXT = body.dataset.ext || "0";
+
+  function ids(id) { return document.getElementById(id); }
+
+  function setStat(extra) {
+    if (!statEl) return;
+    var base = "共 " + TOTAL + " 个节点 · 原图 " + SRC + " · 2026 拓展 " + EXT;
+    statEl.textContent = extra ? (extra + "　|　" + base) : base;
+  }
+
+  /* ---------- 折叠 / 展开 ---------- */
+  var toggles = Array.prototype.slice.call(document.querySelectorAll(".label.has-kids"));
+  toggles.forEach(function (el) {
+    el.addEventListener("click", function () {
+      var li = el.parentElement;
+      if (!li) return;
+      li.classList.toggle("collapsed");
+    });
+  });
+
+  function allNodes() {
+    return Array.prototype.slice.call(document.querySelectorAll("li.node"));
+  }
+
+  function expandAll() {
+    allNodes().forEach(function (li) { li.classList.remove("collapsed"); });
+  }
+
+  function collapseAll() {
+    allNodes().forEach(function (li) {
+      if (li.querySelector("ul.children")) li.classList.add("collapsed");
+    });
+    var root = document.querySelector(".mm > li.node");
+    if (root) root.classList.remove("collapsed");
+    centerRoot();
+  }
+
+  /* 画布很高时根节点会落在垂直中线，需要主动把根节点滚到可视区中央。
+     用 rect 差值（相对增量）：自带 padding 修正，且反复调用会收敛到精确居中。 */
+  function centerRoot() {
+    if (!board) return;
+    if (body.classList.contains("mode-outline")) { board.scrollTop = 0; return; }
+    var rootLabel = document.querySelector(".mm > li.d0 > .label");
+    if (!rootLabel) return;
+    var b = board.getBoundingClientRect();
+    var r = rootLabel.getBoundingClientRect();
+    board.scrollTop += (r.top - b.top) - (b.height - r.height) / 2;
+  }
+
+  /* 模式切换会触发多轮重排，过渡帧上算出来的位置是错的；
+     而 .mm 外框高度不变（只是内部 flex 重新分布），ResizeObserver 等不到收敛。
+     因此用「逐帧轮询 + 连续两帧几何不变判定稳定」代替猜测固定延时。 */
+  var pendingCenter = false;
+  var lastSig = null;
+  var stableFrames = 0;
+  var centerStart = 0;
+  var centerDeadline = 0;
+
+  function rootSignature() {
+    var el = document.querySelector(".mm > li.d0 > .label");
+    if (!el || !board) return "";
+    return el.offsetTop + ":" + el.offsetHeight + ":" + board.scrollHeight;
+  }
+
+  /* 关键：写 scrollTop 必须「判定稳定后只写一次」。
+     早期版本每帧都写相对增量，过渡帧上读到的陈旧 rect 会不断累加，导致漂移甚至冲顶。 */
+  function pollCenter() {
+    if (!pendingCenter) return;
+    var sig = rootSignature();
+    if (sig === lastSig) {
+      stableFrames += 1;
+    } else {
+      stableFrames = 0;
+      lastSig = sig;
+    }
+    var elapsed = Date.now() - centerStart;
+    /* 至少 150ms 且连续 4 帧几何不变，才认为重排真正结束（避免被过渡帧骗到） */
+    if ((elapsed >= 150 && stableFrames >= 4) || Date.now() > centerDeadline) {
+      centerRoot();
+      pendingCenter = false;
+      return;
+    }
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(pollCenter);
+    } else {
+      setTimeout(pollCenter, 16);
+    }
+  }
+
+  function deferCenter() {
+    pendingCenter = true;
+    lastSig = null;
+    stableFrames = 0;
+    centerStart = Date.now();
+    centerDeadline = centerStart + 1500;
+    if (window.requestAnimationFrame) {
+      window.requestAnimationFrame(pollCenter);
+    } else {
+      setTimeout(pollCenter, 16);
+    }
+  }
+
+  var btnExpand = ids("btn-expand");
+  var btnCollapse = ids("btn-collapse");
+  if (btnExpand) btnExpand.addEventListener("click", expandAll);
+  if (btnCollapse) btnCollapse.addEventListener("click", collapseAll);
+
+  /* ---------- 视图模式 ---------- */
+  var modeBtns = {
+    map: ids("mode-map"),
+    outline: ids("mode-outline")
+  };
+
+  function setMode(mode) {
+    if (mode === "outline") {
+      body.classList.add("mode-outline");
+      body.classList.remove("mode-map");
+    } else {
+      body.classList.add("mode-map");
+      body.classList.remove("mode-outline");
+    }
+    Object.keys(modeBtns).forEach(function (k) {
+      var b = modeBtns[k];
+      if (b) b.classList.toggle("on", k === mode);
+    });
+    if (mode === "map") deferCenter();
+  }
+
+  if (modeBtns.map) modeBtns.map.addEventListener("click", function () { setMode("map"); });
+  if (modeBtns.outline) modeBtns.outline.addEventListener("click", function () { setMode("outline"); });
+
+  /* ---------- 聚焦：全部 / 原图 / 2026 拓展 ---------- */
+  var focusBtns = {
+    all: ids("focus-all"),
+    orig: ids("focus-orig"),
+    ext: ids("focus-ext")
+  };
+
+  function setFocus(f) {
+    body.dataset.focus = f;
+    Object.keys(focusBtns).forEach(function (k) {
+      var b = focusBtns[k];
+      if (b) b.classList.toggle("on", k === f);
+    });
+  }
+
+  Object.keys(focusBtns).forEach(function (k) {
+    var b = focusBtns[k];
+    if (b) b.addEventListener("click", function () { setFocus(k); });
+  });
+
+  /* ---------- 搜索高亮 ---------- */
+  var labels = Array.prototype.slice.call(document.querySelectorAll(".label"));
+
+  function clearHits() {
+    labels.forEach(function (l) { l.classList.remove("hit"); });
+  }
+
+  function expandAncestors(li) {
+    var cur = li;
+    while (cur) {
+      cur.classList.remove("collapsed");
+      var parentUl = cur.parentElement;
+      cur = parentUl ? parentUl.closest("li") : null;
+    }
+  }
+
+  function runSearch() {
+    clearHits();
+    if (!searchEl) return;
+    var q = (searchEl.value || "").trim().toLowerCase();
+    if (!q) { setStat(""); return; }
+    var hits = [];
+    labels.forEach(function (l) {
+      var t = (l.dataset.text || l.textContent || "").toLowerCase();
+      if (t.indexOf(q) !== -1) {
+        l.classList.add("hit");
+        var li = l.closest("li");
+        if (li) { expandAncestors(li); hits.push(l); }
+      }
+    });
+    setStat("命中 " + hits.length + " 个节点");
+    if (hits.length === 1 && hits[0].scrollIntoView) {
+      try { hits[0].scrollIntoView({ block: "center", behavior: "smooth" }); } catch (e) { /* noop */ }
+    }
+  }
+
+  if (searchEl) {
+    var timer = null;
+    searchEl.addEventListener("input", function () {
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(runSearch, 160);
+    });
+    searchEl.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { searchEl.value = ""; runSearch(); }
+    });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement !== searchEl && searchEl) {
+      e.preventDefault();
+      searchEl.focus();
+    }
+  });
+
+  /* ---------- 初始化 ---------- */
+  var narrow = window.innerWidth < 900;
+  setMode(narrow ? "outline" : "map");
+  setFocus("all");
+  setStat("");
+  if (!narrow) {
+    deferCenter();
+    window.addEventListener("load", deferCenter);
+  }
+})();
+
+</script>
+
+<script>
+/* 动态测量统一导航栏实际高度，供 .toolbar 吸顶偏移使用（避免固定值失配） */
+(function () {
+  var nav = document.querySelector('.wb-topbar');
+  if (!nav) return;
+  function sync() {
+    document.documentElement.style.setProperty('--wb-topbar-h', nav.offsetHeight + 'px');
+  }
+  sync();
+  window.addEventListener('resize', sync);
+  window.addEventListener('load', sync);
+  if (window.ResizeObserver) { new ResizeObserver(sync).observe(nav); }
+})();
+</script>
+</body>
+</html>
