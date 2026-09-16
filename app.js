@@ -395,8 +395,22 @@
     $('#printBtn').addEventListener('click', function () { window.print(); });
   }
 
+  /* 顶栏高度动态测量：供 .sidebar 吸顶与锚点滚动偏移使用（避免固定值失配） */
+  function syncTopbarHeight() {
+    var navEl = $('.topbar');
+    if (!navEl) return;
+    var sync = function () {
+      document.documentElement.style.setProperty('--topbar-h', navEl.offsetHeight + 'px');
+    };
+    sync();
+    window.addEventListener('resize', sync);
+    window.addEventListener('load', sync);
+    if (window.ResizeObserver) { new ResizeObserver(sync).observe(navEl); }
+  }
+
   /* ---------------- 启动 ---------------- */
   function init() {
+    syncTopbarHeight();
     renderSOP();
     renderKeyword();
     activatePage();
